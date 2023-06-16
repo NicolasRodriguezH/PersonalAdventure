@@ -13,12 +13,15 @@ public class PlayerController : MonoBehaviour
     private const string lastVertical = "LastVertical";
     private const string walkingState = "Walking";
     private Animator animator;
+    private Rigidbody2D playerRigidbody;
 
     // Start is called before the first frame update
     void Start()
     {
         // Inicializamos el animator en Start por ser componente del Player
         animator = GetComponent<Animator>();
+        // Inicializamos el Rigidbody2D al ser componente de Player
+        playerRigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -29,16 +32,23 @@ public class PlayerController : MonoBehaviour
         // space = velocity * time;
         if(Mathf.Abs(Input.GetAxisRaw(horizontal)) > 0.5f) 
         {
-            this.transform.Translate(new Vector3(Input.GetAxisRaw(horizontal) * speed * Time.deltaTime, 0, 0));
+            /* this.transform.Translate(new Vector3(Input.GetAxisRaw(horizontal) * speed * Time.deltaTime, 0, 0)); */
+            playerRigidbody.velocity = new Vector2(Input.GetAxisRaw(horizontal) * speed * Time.deltaTime, playerRigidbody.velocity.y);
             walking = true;
             // Se actualiza el Vector2 dependiendo de la entrada del Input
             lastMovement = new Vector2(Input.GetAxisRaw(horizontal), 0);
         }
         if(Mathf.Abs(Input.GetAxisRaw(vertical)) > 0.5f) 
         {
-            this.transform.Translate(new Vector3(0, Input.GetAxisRaw(vertical) * speed * Time.deltaTime, 0));
+            /*  this.transform.Translate(new Vector3(0, Input.GetAxisRaw(vertical) * speed * Time.deltaTime, 0)); */
+            playerRigidbody.velocity = new Vector2( playerRigidbody.velocity.x, Input.GetAxisRaw(vertical) * speed * Time.deltaTime);
             walking = true;
             lastMovement = new Vector2(0, Input.GetAxisRaw(vertical));
+        }
+
+        if(!walking) 
+        {
+            playerRigidbody.velocity = Vector2.zero;
         }
 
         // Se asigna en Update el cambio de estado dependiendo del Input

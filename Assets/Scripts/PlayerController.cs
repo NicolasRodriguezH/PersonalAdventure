@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 4.0f;
     private bool walking = false;
-    private Vector2 lastMovement = Vector2.zero;
+    public Vector2 lastMovement = Vector2.zero;
     private const string horizontal = "Horizontal";
     private const string vertical = "Vertical";
     private const string lastHorizontal = "LastHorizontal";
@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     private const string walkingState = "Walking";
     private Animator animator;
     private Rigidbody2D playerRigidbody;
-
     public static bool playerCreated; // Por defecto su valor sera false!
+    public string nextPlaceName;
 
     // Start is called before the first frame update
     void Start()

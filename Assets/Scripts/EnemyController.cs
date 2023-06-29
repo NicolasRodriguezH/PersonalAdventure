@@ -36,8 +36,8 @@ public class EnemyController : MonoBehaviour
         enemyAnimator = GetComponent<Animator>();
 
         // Estos contadores serviran para decidir si toca hacer movimiento o estar quieto
-        timeBetweenStepsCounter = timeBetweenSteps /* * Random.Range(0.5f, 1.5f) */;
-        timeToMakeStepCounter = timeToMakeStep /* * Random.Range(0.5f, 1.5f) */;
+        timeBetweenStepsCounter = timeBetweenSteps * Random.Range(0.5f, 1.5f);
+        timeToMakeStepCounter = timeToMakeStep * Random.Range(0.5f, 1.5f);
     }
 
     // Update is called once per frame
